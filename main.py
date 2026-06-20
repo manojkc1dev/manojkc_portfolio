@@ -19,7 +19,7 @@ app = FastAPI()
 # 3. CORS MIDDLEWARE
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://manojkc1.com.np"], # YOUR LIVE DOMAIN
+    allow_origins=["https://manojkc1.com.np"], #LIVE DOMAIN
     allow_methods=["*"],
     allow_headers=["*"],
 )
