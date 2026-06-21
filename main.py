@@ -1,3 +1,5 @@
+import os
+
 import smtplib
 from email.message import EmailMessage
 
@@ -91,7 +93,7 @@ async def get_projects():
 
 # 8. MOUNT STATIC FILES (MUST BE AT THE VERY BOTTOM)
 # This serves index.html at the root ("/") automatically without conflicting routes.
-app.mount("/", StaticFiles(directory=".", html=True), name="static")
+app.mount("/static", StaticFiles(directory=".", html=True), name="static")
 
 @app.get("/health")
 def health_check():
