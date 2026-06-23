@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // We use the relative path '/contact' so it works on your live domain
             // and directs the request to your FastAPI backend
             try {
-                const response = await fetch("api/contact", {
+                const response = await fetch("https://manojkc-backend.onrender.com/api//contact", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
