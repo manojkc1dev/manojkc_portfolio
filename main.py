@@ -72,7 +72,7 @@ def send_email_notification(sender_name, sender_email, sender_message):
 # --- Email Configuration END ---        
 
 # 6. POST ENDPOINT FOR CONTACT FORM
-@app.post("/contact")
+@app.post("/api/contact")
 async def create_contact_message(data: ContactMessageSchema, db: Session = Depends(get_db)):
     new_message = ContactMessageModel(
         name=data.name,
