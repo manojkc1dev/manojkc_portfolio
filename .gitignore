@@ -1,5 +1,24 @@
-myenv/
-__pycache__/
-*.db
-.DS_Store
+# --- Secrets and Environment Variables ---
 .env
+
+# --- Virtual Environment ---
+myenv/
+venv/
+.venv/
+
+# --- Python Bytecode and Caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Database Files ---
+*.db
+*.sqlite3
+
+# --- IDE and Editor Settings ---
+.vscode/
+.idea/
+.DS_Store
+
+# --- Logs ---
+*.log
