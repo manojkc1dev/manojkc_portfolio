@@ -1,8 +1,8 @@
 import os
+from dotenv import load_dotenv
 
 import smtplib
 from email.message import EmailMessage
-
 from fastapi.responses import FileResponse
 
 from fastapi import FastAPI, Depends, HTTPException
@@ -45,10 +45,9 @@ class ContactMessageSchema(BaseModel):
 
 
 
-
-MY_EMAIL = "manojkc1dev@gmail.com"
-
-MY_APP_PASSWORD = "xpxiygqwpklxrhpy"
+load_dotenv()
+MY_EMAIL = os.getenv("EMAIL_USER")
+MY_APP_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 
 def send_email_notification(sender_name, sender_email, sender_message):
