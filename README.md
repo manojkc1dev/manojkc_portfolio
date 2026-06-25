@@ -25,12 +25,12 @@ I am currently open to **Backend Developer roles, SaaS MVP contracts, and freela
 ### [CalcPro Calculator](https://manojkc-portfolio.onrender.com)
 *A responsive, multi-functional web calculator featuring Basic, Scientific, Programmer, and Financial modes.*
 * **Tech:** React, JavaScript, Vite, Math.js
-* [Live Preview](https://manojkc-portfolio.onrender.com) | [Source Code](https://github.com/manojkc1dev/calcpro)
+* [Live Preview](https://calcpro-calculator.onrender.com/) | [Source Code](https://github.com/manojkc1dev/calcpro-calculator)
 
 ### [Shabdhabhandar Dictionary](https://manojkc-portfolio.onrender.com)
 *A fast, English-to-Nepali dictionary web app featuring custom fault-tolerant Unicode search logic and automated database ingestion.*
 * **Tech:** Python, Django, JavaScript, SQLite
-* [Live Preview](https://manojkc-portfolio.onrender.com) | [Source Code](https://github.com/manojkc1dev/shabdhabhandar)
+* [Live Preview](https://sabdhabhandar.onrender.com/) | [Source Code](https://github.com/manojkc1dev/sabdhabhandar)
 
 ---
 
