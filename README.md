@@ -1,8 +1,7 @@
 # Manoj K.C. | Backend Developer
 
-| | | |
-| :---: | :---: | :---: |
-| [![Portfolio](https://img.shields.io/badge/Portfolio-Live_Site-blue?style=for-the-badge&logo=🌐)](https://manojkc1.com.np) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/manojkc1dev) | [![GitHub](https://img.shields.io/badge/GitHub-View_Work-black?style=for-the-badge&logo=github)](https://github.com/manojkc1dev) |
+| [![Portfolio](https://img.shields.io/badge/Portfolio-Live_Site-blue?style=for-the-badge&logo=🌐)](https://manojkc1.com.np) [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/manojkc1dev) [![GitHub](https://img.shields.io/badge/GitHub-View_Work-black?style=for-the-badge&logo=github)](https://github.com/manojkc1dev) |
+| :---: |
 
 ---
 
