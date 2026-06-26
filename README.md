@@ -3,11 +3,9 @@
 ## 📬 Let's Collaborate
 I’m always interested in hearing about new projects, backend architecture challenges, or job opportunities. Feel free to reach out!
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live_Site-blue?style=for-the-badge&logo=🌐)](https://manojkc1.com.np) | :---: |
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/manojkc1dev)
-[![GitHub](https://img.shields.io/badge/GitHub-View_Work-black?style=for-the-badge&logo=github)](https://github.com/manojkc1dev)
-[![Email](https://img.shields.io/badge/Email-manojkc1dev@gmail.com-red?style=for-the-badge&logo=gmail)](mailto:manojkc1dev@gmail.com)
-
+| [![Portfolio](https://img.shields.io/badge/Portfolio-Live_Site-blue?style=for-the-badge&logo=🌐)](https://manojkc1.com.np) |
+| :---: |
+| [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/manojkc1dev) [![GitHub](https://img.shields.io/badge/GitHub-View_Work-black?style=for-the-badge&logo=github)](https://github.com/manojkc1dev) [![Email](https://img.shields.io/badge/Email-manojkc1dev@gmail.com-red?style=for-the-badge&logo=gmail)](mailto:manojkc1dev@gmail.com) |
 ---
 
 ## 👨‍💻 About Me
