@@ -36,6 +36,6 @@ I am currently open to **Backend Developer roles, SaaS MVP contracts, and freela
 ## 📬 Let's Collaborate
 I’m always interested in hearing about new projects, backend architecture challenges, or job opportunities. Feel free to reach out!
 
-* **Portfolio:** [manojkc-portfolio.onrender.com](https://manojkc-portfolio.onrender.com)
+* **Portfolio:** [manojkc-portfolio.onrender.com](https://manojkc1.com.np)
 * **LinkedIn:** [in/manojkc1dev](https://www.linkedin.com/in/manojkc1dev)
 * **GitHub:** [github.com/manojkc1dev](https://github.com/manojkc1dev)
