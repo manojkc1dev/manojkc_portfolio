@@ -73,11 +73,10 @@
   >
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       <div
-        class="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full"
-      ></div>
+        class="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full">
+      </div>
       <div
-        class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/20 blur-[120px] rounded-full"
-      ></div>
+        class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/20 blur-[120px] rounded-full"></div>
     </div>
 
     <header class="w-full bg-[#090d16]/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50">
@@ -171,8 +170,9 @@
             >
               <i class="fa-brands fa-linkedin"></i> LinkedIn
             </a>
-            <a href="./static/Manoj_KC_Resume.pdf?v=2" download="Manoj_KC_Resume.pdf" class="resume-button">
-              Resume
+            <a href="./static/Manoj_KC_Resume.pdf?v=2" download="Manoj_KC_Resume.pdf" class="resume-button inline-flex items-center gap-2">
+              <i class="fa-solid fa-download text-sm"></i>
+              <span>Resume</span>
             </a>
           </div>
         </div>
@@ -219,15 +219,45 @@
         class="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800 w-full scroll-mt-24"
         data-aos="fade-up"
       >
+      <div class="max-w-5xl mx-auto flex flex-col justify-between space-y-10">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-10">
           About Me
         </h2>
-        <div class="bg-slate-800/30 p-10 rounded-3xl border border-slate-800">
-          BIT graduate from Nepal, building production-ready backend systems. I specialize in Django REST Framework, JWT authentication, and PostgreSQL. Designing APIs that are clean, documented, and built to scale.<br><br>
-          My work sits at the intersection of solid backend architecture and real-world delivery: from schema design and ORM optimization to deployment on Render and version-controlled Git workflows. I write code that teammates can read and systems that clients can rely on.<br><br>
-          Open to backend roles, SaaS MVP contracts, and freelance API projects.
-        </div>
-      </section>
+         
+
+  <div class="space-y-6 text-slate-300 leading-relaxed text-base md:text-lg">
+    
+    <p>
+      BIT graduate from Nepal, building production-ready backend systems with <span class="text-white font-semibold">Python, Django, and PostgreSQL</span>. I specialize in Django REST Framework, designing REST APIs that are clean, versioned, well-documented, and built to scale from day one.
+    </p>
+
+    <p>
+      My backend work covers the full server-side lifecycle: <span class="text-white font-medium">data modeling and schema design</span>, Django ORM optimization, JWT authentication, and automated deployments. I've built systems handling real load-from dictionary engines ingesting 10,000+ word entries to secure calculation APIs.
+    </p>
+
+    <div class="my-8 p-6 rounded-xl bg-[#0a0f1d] border border-slate-800/80 border-l-4 border-l-cyan-400 text-slate-200 text-base italic shadow-lg">
+      "I care about code teammates can read, and APIs clients can integrate without a support call. Every endpoint I ship comes paired with Postman documentation and a strict README."
+    </div>
+
+  </div>
+
+  <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono">
+    
+    <div class="flex items-center gap-2.5 text-slate-400">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+      </span>
+      <span>Based in Kathmandu, Nepal</span>
+    </div>
+
+    <div class="text-cyan-400 bg-cyan-950/30 border border-cyan-800/60 px-3 py-1.5 rounded-md">
+      ⚡ Available for On-site & Remote Roles
+    </div>
+
+  </div>
+
+</div>
 
       <section id="skills" class="py-20 px-6 max-w-6xl mx-auto">
   <h2 class="text-3xl font-bold text-white mb-10">Tech Stack</h2>
@@ -249,6 +279,7 @@
       <div class="flex flex-wrap gap-2">
         <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs border border-cyan-500/20">Django</span>
         <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs border border-cyan-500/20">Django REST Framework</span>
+        <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-xs border border-cyan-500/20">FAst API</span>
       </div>
     </div>
 
