@@ -55,6 +55,7 @@ MY_APP_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 
 def send_email_notification(sender_name, sender_email, sender_message):
+    # 1. Setup the message
     msg = EmailMessage()
     msg.set_content(f"New message from: {sender_name}\nEmail: {sender_email}\n\nMessage:\n{sender_message}")
     msg['Subject'] = "New Portfolio Contact"
@@ -64,17 +65,17 @@ def send_email_notification(sender_name, sender_email, sender_message):
     try:
         print("Attempting to connect to Gmail SMTP via SSL on Port 465...")
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(MY_EMAIL, MY_APP_PASSWORD) 
+            server.login(MY_EMAIL, MY_APP_PASSWORD)
             server.send_message(msg)
-        
+            
         print("SUCCESS: Email sent successfully!")
         return True
-        
+
     except smtplib.SMTPAuthenticationError:
         print("ERROR: Authentication failed. Check your App Password.")
     except Exception as e:
         print(f"ERROR: Server error occurred: {e}")
-    
+        
     return False
 
 
