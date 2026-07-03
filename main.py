@@ -1,19 +1,21 @@
 import os
-from dotenv import load_dotenv
 import smtplib
+from dotenv import load_dotenv
 from email.message import EmailMessage
+from fastapi import FastAPI, Depends, BackgroundTasks, HTTPException
 from fastapi.responses import FileResponse
-from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from pydantic import BaseModel, EmailStr
+
 from database import SessionLocal, engine, Base
 from models import ContactMessage as ContactMessageModel 
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-
+from pydantic import BaseModel, EmailStr
 
 # Initialize Database
 Base.metadata.create_all(bind=engine)
+load_dotenv()
+
 app = FastAPI()
 
 # CORS Config
@@ -21,6 +23,7 @@ origins = [
     "https://manojkc1.com.np",
     "https://www.manojkc1.com.np",
 ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -29,7 +32,13 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization"],
 )
 
-# Database Dependency
+# SMTP Config from Environment Variables
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp-relay.brevo.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+SMTP_USER = os.getenv("EMAIL_USER")
+SMTP_PASS = os.getenv("EMAIL_PASSWORD")
+MY_EMAIL = os.getenv("EMAIL_USER")
+
 def get_db():
     db = SessionLocal()
     try:
@@ -37,19 +46,10 @@ def get_db():
     finally:
         db.close()
 
-# Schema
 class ContactMessageSchema(BaseModel):
     name: str
     email: EmailStr
     message: str
-
-load_dotenv()
-MY_EMAIL = os.getenv("EMAIL_USER")
-# Use environment variables for Relay Service (e.g., Brevo/SendGrid) instead of Gmail
-SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp-relay.brevo.com")
-SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
-SMTP_USER = os.getenv("EMAIL_USER")
-SMTP_PASS = os.getenv("EMAIL_PASSWORD")
 
 def send_email_notification(sender_name, sender_email, sender_message):
     msg = EmailMessage()
@@ -59,7 +59,6 @@ def send_email_notification(sender_name, sender_email, sender_message):
     msg['To'] = MY_EMAIL
 
     try:
-        # Using a generic relay setup
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
             server.login(SMTP_USER, SMTP_PASS)
@@ -73,7 +72,7 @@ def send_email_notification(sender_name, sender_email, sender_message):
 async def contact_route(
     contact_data: ContactMessageSchema, 
     background_tasks: BackgroundTasks,
-    db: Session = Depends(get_db) # Added database dependency
+    db: Session = Depends(get_db)
 ):
     # Save to Database
     new_message = ContactMessageModel(
@@ -84,15 +83,15 @@ async def contact_route(
     db.add(new_message)
     db.commit()
     db.refresh(new_message)
-    
-    # Queue Email
+
+    # Queue Email in background
     background_tasks.add_task(
         send_email_notification, 
         contact_data.name, 
         contact_data.email, 
         contact_data.message
     )
-    
+
     return {"status": "success", "message": "Message saved and notification queued."}
 
 @app.get("/")
