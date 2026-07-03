@@ -95,14 +95,15 @@ async def create_contact_message(data: ContactMessageSchema, db: Session = Depen
         db.commit()
         db.refresh(new_message)
         
-        send_email_notification(data.name, data.email, data.message)
+        email_sent = send_email_notification(data.name, data.email, data.message)
+        
+        if not email_sent:
+            raise HTTPException(status_code=500, detail="Message saved to database, but failed to send email notification. Check server logs.")
+
         return {"status": "success", "message": "Message Sent Successfully!"}
     
     except Exception as e:
-        # THIS PRINTS THE REAL ERROR TO YOUR VS CODE TERMINAL
         print(f"--- DEBUG ERROR: {str(e)} ---")
-        # THIS SENDS THE REAL ERROR TO THE BROWSER
-        from fastapi import HTTPException
         raise HTTPException(status_code=500, detail=str(e))
     
 
