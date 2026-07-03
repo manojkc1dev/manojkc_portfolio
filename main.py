@@ -1,11 +1,9 @@
 import os
 from dotenv import load_dotenv
-
 import smtplib
 from email.message import EmailMessage
 from fastapi.responses import FileResponse
-
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr
 from database import SessionLocal, engine, Base
@@ -14,25 +12,24 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 
+# Initialize Database
 Base.metadata.create_all(bind=engine)
-
 app = FastAPI()
 
+# CORS Config
 origins = [
     "https://manojkc1.com.np",
     "https://www.manojkc1.com.np",
 ]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-     allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST"],
     allow_headers=["Content-Type", "Authorization"],
 )
 
-
-
+# Database Dependency
 def get_db():
     db = SessionLocal()
     try:
@@ -40,22 +37,21 @@ def get_db():
     finally:
         db.close()
 
-
-
+# Schema
 class ContactMessageSchema(BaseModel):
     name: str
     email: EmailStr
     message: str
 
-
-
 load_dotenv()
 MY_EMAIL = os.getenv("EMAIL_USER")
-MY_APP_PASSWORD = os.getenv("EMAIL_PASSWORD")
-
+# Use environment variables for Relay Service (e.g., Brevo/SendGrid) instead of Gmail
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp-relay.brevo.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+SMTP_USER = os.getenv("EMAIL_USER")
+SMTP_PASS = os.getenv("EMAIL_PASSWORD")
 
 def send_email_notification(sender_name, sender_email, sender_message):
-    # 1. Setup the message
     msg = EmailMessage()
     msg.set_content(f"New message from: {sender_name}\nEmail: {sender_email}\n\nMessage:\n{sender_message}")
     msg['Subject'] = "New Portfolio Contact"
@@ -63,42 +59,41 @@ def send_email_notification(sender_name, sender_email, sender_message):
     msg['To'] = MY_EMAIL
 
     try:
-        print("Attempting to connect to Gmail SMTP via SSL on Port 465...")
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(MY_EMAIL, MY_APP_PASSWORD)
+        # Using a generic relay setup
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USER, SMTP_PASS)
             server.send_message(msg)
-            
-        print("SUCCESS: Email sent successfully!")
         return True
-
-    except smtplib.SMTPAuthenticationError:
-        print("ERROR: Authentication failed. Check your App Password.")
     except Exception as e:
-        print(f"ERROR: Server error occurred: {e}")
-        
-    return False
-
-
+        print(f"ERROR: Email failed: {e}")
+        return False
 
 @app.post("/api/contact")
-async def create_contact_message(data: ContactMessageSchema, db: Session = Depends(get_db)):
-    try:
-        new_message = ContactMessageModel(name=data.name, email=data.email, message=data.message)
-        db.add(new_message)
-        db.commit()
-        db.refresh(new_message)
-        
-        email_sent = send_email_notification(data.name, data.email, data.message)
-        
-        if not email_sent:
-            raise HTTPException(status_code=500, detail="Message saved to database, but failed to send email notification. Check server logs.")
-
-        return {"status": "success", "message": "Message Sent Successfully!"}
+async def contact_route(
+    contact_data: ContactMessageSchema, 
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db) # Added database dependency
+):
+    # Save to Database
+    new_message = ContactMessageModel(
+        name=contact_data.name,
+        email=contact_data.email,
+        message=contact_data.message
+    )
+    db.add(new_message)
+    db.commit()
+    db.refresh(new_message)
     
-    except Exception as e:
-        print(f"--- DEBUG ERROR: {str(e)} ---")
-        raise HTTPException(status_code=500, detail=str(e))
+    # Queue Email
+    background_tasks.add_task(
+        send_email_notification, 
+        contact_data.name, 
+        contact_data.email, 
+        contact_data.message
+    )
     
+    return {"status": "success", "message": "Message saved and notification queued."}
 
 @app.get("/")
 def read_root():
