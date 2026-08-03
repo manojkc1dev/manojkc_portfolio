@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.hero',
     'apps.skills',
     'apps.experience',
+    'apps.contact',
 ]
 
 MIDDLEWARE = [

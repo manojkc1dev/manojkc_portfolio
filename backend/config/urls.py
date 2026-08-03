@@ -38,7 +38,8 @@ urlpatterns = [
     path('api/v1/projects/', include('apps.projects.urls')),
     path('api/v1/hero/', include('apps.hero.urls')),
     path('api/v1/skills/', include('apps.skills.urls')),
-        path('api/v1/experience/', include('apps.experience.urls')),
+    path('api/v1/experience/', include('apps.experience.urls')),
+    path('api/v1/contact/', include('apps.contact.urls')),
 ]
 
 if settings.DEBUG:
