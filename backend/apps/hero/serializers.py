@@ -1,11 +1,7 @@
 from rest_framework import serializers
-from .models import Hero
+from .models import Hero  # Make sure this says Hero, not HeroProfile
 
-class HeroOutputSerializer(serializers.ModelSerializer):
+class HeroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hero
-        fields = [
-            'id', 'full_name', 'professional_title', 'headline',
-            'short_introduction', 'profile_photo', 'resume_pdf',
-            'github_url', 'linkedin_url', 'email'
-        ]
+        fields = '__all__'

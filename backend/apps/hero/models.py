@@ -1,21 +1,20 @@
-# apps/hero/models.py
 from django.db import models
-from core.models import BaseModel
 
-class Hero(BaseModel):
-    full_name = models.CharField(max_length=150)
-    professional_title = models.CharField(max_length=200)
-    headline = models.CharField(max_length=300)
-    short_introduction = models.TextField()
-    profile_photo = models.ImageField(upload_to='hero/')
-    resume_pdf = models.FileField(upload_to='hero/resume/', blank=True, null=True)
-    github_url = models.URLField(blank=True, null=True)
-    linkedin_url = models.URLField(blank=True, null=True)
-    email = models.EmailField()
+class Hero(models.Model):
+    name = models.CharField(max_length=100, default="MANOJ K.C.")
+    availabilityBadge = models.CharField(max_length=255, default="Available for On-Site (Kathmandu) & Remote Roles")
+    typingTexts = models.TextField(default="Python & Django Backend Architect,FinTech Systems Integrator")
+    subtitle = models.CharField(max_length=255, default="REST APIs • Microservices • PostgreSQL • JWT Auth")
+    description = models.TextField(default="Specialized in architecting high-throughput REST APIs, resilient relational database schemas, and secure transaction pipelines.")
+    location = models.CharField(max_length=100, default="Kathmandu, Nepal")
+    hireMeUrl = models.CharField(max_length=255, default="#contact")
+    profileImage = models.CharField(max_length=255, default="/profile.jpg")
+    
+    full_name = models.CharField(max_length=100, default="MANOJ K.C.")
+    professional_title = models.CharField(max_length=255, default="Python & Django Backend Architect")
+    email = models.EmailField(default="manoj@example.com")
     is_active = models.BooleanField(default=True)
-
-    class Meta:
-        verbose_name_plural = "Hero Section"
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Hero Content - {self.full_name}"
+        return self.name

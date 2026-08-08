@@ -1,5 +1,13 @@
+# --- Node / Frontend ---
+node_modules/
+dist/
+build/
+.vite/
+
 # --- Secrets and Environment Variables ---
 .env
+.env*
+!.env.example
 
 # --- Virtual Environment ---
 myenv/
@@ -15,7 +23,7 @@ __pycache__/
 *.db
 *.sqlite3
 
-# Static & Media
+# --- Static & Media ---
 /media/
 /staticfiles/
 
@@ -24,10 +32,9 @@ __pycache__/
 .idea/
 .DS_Store
 
-# --- Logs ---
+# --- Logs and Testing ---
 *.log
+coverage/
 
 # --- Distribution / Packaging ---
-build/
-dist/
 *.egg-info/

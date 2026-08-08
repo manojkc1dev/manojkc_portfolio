@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import HeroDetailApi
+from .views import HeroProfileView
 
 urlpatterns = [
-    path('', HeroDetailApi.as_view(), name='hero-detail'),
+    path('profile/', HeroProfileView.as_view(), name='hero-profile'),
 ]
